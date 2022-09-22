@@ -17,19 +17,19 @@
     [v-cloak] {
       display: none;
     }
-
+    input {
+      margin: 10px;
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div id="app" v-cloak>
-    {{greeting}}
-    <br>
-    <input @keyup.enter="greet(isVisible)" type="text" v-model="greeting">
-    
+    <login-form/>
     <hr>
-    <form>
-      <button @click="toggleBox($event)" type="submit">toggle box</button>
-    </form>
+
+    <button @click="toggleBox($event)" type="submit">toggle box</button>
+
     <div v-if="isVisible" class="box">1</div>
 
   </div>
@@ -54,6 +54,27 @@
         }
       }
     });
+
+    app.component('login-form', {
+      template: `
+        <div>
+          <h3>{{title}}</h3>
+          <label> email: 
+            <input type="email"/>
+          </label>
+
+          <label> password:
+            <input type="password"/>
+          </label>
+        <div>
+      `,
+      data(){
+        return {
+          title: 'Login form'
+        }
+      }
+    });// add component to app (component-name, component-options)
+
     app.mount("#app");
   </script>
 </body>
