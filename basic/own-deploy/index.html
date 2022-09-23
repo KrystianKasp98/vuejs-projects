@@ -57,24 +57,52 @@
 
     app.component('login-form', {
       template: `
-        <div>
+        <form @submit.prevent="handleSubmit()">
           <h3>{{title}}</h3>
-          <label> email: 
-            <input type="email"/>
-          </label>
-
-          <label> password:
-            <input type="password"/>
-          </label>
-        <div>
+          <custom-input v-model="email" label="email" />
+          <custom-input v-model="password" label="password"/>
+          <button>submit</button>
+        </form>
       `,
       data(){
         return {
-          title: 'Login form'
+          title: "Login form",
+          email: "",
+          password: "",
+        }
+      }, methods: {
+        handleSubmit() {
+          console.log('submitted');
+          console.log(this.email);
+          console.log(this.password);
+        }
+      },
+      components: ['custom-input']
+    });// add component to app (component-name, component-options)
+    app.component('custom-input', {
+      template: `
+      <label>
+        {{label}}
+        <input type="text" v-model="inputValue">  
+      </label>
+      `,
+      props: ['label', 'modelValue'],
+      computed: {
+        inputValue: {
+          get(){
+            return this.modelValue
+          },
+          set(value){
+            this.$emit('update:modelValue', value);//update data in higher component
+          }
         }
       }
-    });// add component to app (component-name, component-options)
-
+      // data(){
+      //   return {
+      //     inputValue: ""
+      //   }
+      // }
+    });
     app.mount("#app");
   </script>
 </body>
