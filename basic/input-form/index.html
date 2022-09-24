@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    body{
+      background-color: grey;
+    }
     .box {
       background-color: rgb(248, 188, 248);
       font-size: 40px;
@@ -26,35 +29,11 @@
 <body>
   <div id="app" v-cloak>
     <login-form/>
-    <!-- html components works only when there isn't any components like <login-form/> above -->
-    <hr>
-
-    <button @click="toggleBox($event)" type="submit">toggle box</button>
-
-    <div v-if="isVisible" class="box">1</div>
-
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
-    const app = Vue.createApp({
-      data() {
-        return {
-          greeting: "Hello Vue 3!",
-          isVisible: true
-        }
-      },
-      methods: {
-        toggleBox(event) {
-          event.preventDefault()
-          this.isVisible = !this.isVisible;
-        },
-        greet(isVisible){
-          // it's for testing only. Outside createApp object we don't need this prefix, it's only required in Vue.createApp scope
-          isVisible ? console.log(`your generated greeting =>> ${this.greeting}`) : console.log(`your invisible generated greeting =>> ${this.greeting}`);
-        }
-      }
-    });
+    const app = Vue.createApp({});
 
     app.component('login-form', {
       template: `
@@ -89,7 +68,8 @@
         }
       },
       components: ['custom-input']
-    });// add component to app (component-name, component-options)
+    });
+
     app.component('custom-input', {
       template: `
       <label>
@@ -110,6 +90,7 @@
       }
     });
     app.mount("#app");
+
   </script>
 </body>
 </html>
