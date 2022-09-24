@@ -28,14 +28,8 @@
 </head>
 <body>
   <div id="app" v-cloak>
-    <login-form/>
-    <!-- html components works only when there isn't any components like <login-form/> above -->
-    <hr>
-
     <button @click="toggleBox($event)" type="submit">toggle box</button>
-
-    <div v-if="isVisible" class="box">1</div>
-
+    <test-box v-if="isVisible"/>
   </div>
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -43,79 +37,34 @@
     const app = Vue.createApp({
       data() {
         return {
-          greeting: "Hello Vue 3!",
-          isVisible: true
+          isVisible: false
         }
       },
       methods: {
         toggleBox(event) {
           event.preventDefault();
           this.isVisible = !this.isVisible;
-        },
-        greet(isVisible){
-          // it's for testing only. Outside createApp object we don't need this prefix, it's only required in Vue.createApp scope
-          isVisible ? console.log(`your generated greeting =>> ${this.greeting}`) : console.log(`your invisible generated greeting =>> ${this.greeting}`);
-        }
-      }
-    });
-
-    app.component('login-form', {
-      template: `
-        <form @submit.prevent="handleSubmit()">
-          <h3>{{title}}</h3>
-          <custom-input 
-            v-for="(input, index) in inputs" 
-            :key="index" 
-            v-model="input.value" 
-            :label="input.label" 
-            :type="input.type"
-          />
-          <button>Log in</button>
-        </form>
-      `,
-      data(){
-        return {
-          title: "Login form",
-          inputs: [
-            {
-              label: 'Email',
-              value: '',
-              type: 'email'
-            },
-            {
-              label: 'Password',
-              value: '',
-              type: 'password'
-            }
-          ],
-        }
-      }, methods: {
-        handleSubmit() {
-          console.log('submitted');
-          for (const input in this.inputs){
-            console.log(this.inputs[input]["value"]);
-          }
         }
       },
-      components: ['custom-input']
-    });// add component to app (component-name, component-options)
-    app.component('custom-input', {
+      updated() {
+        console.log('updated -> App');
+      },
+      created(){
+        console.log('created -> App');
+      }
+    });
+    app.component('test-box', {
       template: `
-      <label>
-        {{label}}
-        <input :type="type" v-model="inputValue">  
-      </label>
+        <div class="box"></div>
       `,
-      props: ['label', 'modelValue', 'type'],
-      computed: {
-        inputValue: {
-          get(){
-            return this.modelValue
-          },
-          set(value){
-            this.$emit('update:modelValue', value);//update data in higher component
-          }
-        }
+      created() {
+        console.log('created');
+      },
+      mounted() {
+        console.log('mounted');
+      },
+      unmounted() {
+        console.log('unmounted');
       }
     });
     app.mount("#app");
