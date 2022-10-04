@@ -62,4 +62,11 @@ export default defineComponent({
   .home__title
     text-align: center
     margin-top: 50px
+
+  .home__form
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin: 100px auto
+    width: 100%
 </style>
