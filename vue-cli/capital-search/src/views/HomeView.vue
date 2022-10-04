@@ -2,11 +2,18 @@
   <div class="home">
     <h1 class="home__title">Capital App</h1>
     <form class="home__form"> 
-      <SearchForm v-model="inputedCountry" :findCapital="find"/>
+      <SearchForm 
+      v-model="inputedCountry" 
+      :findCapital="find" 
+      className="home__search-form"
+    />
 
-      <p v-if="receivedCapital">{{receivedCapital}}</p>
-      <SpinnerLoader v-else-if="isLoading"/>
-      <p v-if="errorMessage">{{errorMessage}}</p>
+      <ResultPanel 
+        className="home__result-panel" 
+        :receivedCapital="receivedCapital"
+        :errorMessage="errorMessage"
+        :isLoading="isLoading"
+      />
 
     </form>
   </div>
@@ -15,14 +22,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import CapitalAPI from "../api/capital";
-import SpinnerLoader from "../components/SpinnerLoader.vue";
 import SearchForm from "../components/SearchForm.vue";
+import ResultPanel from "../components/ResultPanel.vue";
 
 export default defineComponent({
   name: 'HomeView',
   components: {
-    SpinnerLoader,
-    SearchForm
+    SearchForm,
+    ResultPanel
   },
   data() {
     return {
