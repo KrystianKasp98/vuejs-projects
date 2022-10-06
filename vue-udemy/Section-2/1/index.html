@@ -6,7 +6,30 @@
   </head>
   <body>
     <div id="app" v-cloak v-html="">
-      {{fullName()}}
+      <p><a :href="url" target="_blank">Guugol</a></p>
+      <p v-html="rawUrl"></p><!-- risky, -->
+      <p>{{typeof age}}</p>
+      <p>
+        {{fullName}}
+        <hr>
+
+        <label>First Name</label>
+        <input type="text" v-model.lazy.trim="firstName">
+
+        <label>Middle Name</label>
+        <input type="text" @keyup.ctrl.enter="updateMiddleName">
+
+        <label>Last Name</label>
+        <!-- <input type="text" :value="lastName"> --><!-- :value just take value from data but, don't change passed data on input change, it's just passing data nothing more, value of input may be edited but It wont change data-->
+        <input type="text" v-model="lastName">
+        <input type="text" :value="lastName" @input.prevent="triggerLastName('trigger updateLastName', $event)">
+      </p>
+
+      <label>Age</label>
+      <input type="text" v-model.number="age">
+
+      <button @click="incrementAge">Increment age</button>
+      <button @click.ctrl="age--">Decrement age</button><!--it's possible to pass an expression to @event attribute, to fire event you need use ctrl+click-->
     </div>
 
     <!-- <div id="app2">
