@@ -563,3 +563,71 @@ Similar to useEffect in react :D, just listening on passed ```data``` in case be
   }
 ```
 
+### iterations
+
+dauble nested objects list
+
+```js
+{
+  data() {
+      return {
+          birds: ['Pigeons', 'Eagles', 'Doves', 'Parrots'],
+          people: [
+              { name: 'John', age: 20 },
+              { name: 'Rick', age: 18 },
+              { name: 'Amy', age: 33 }
+          ]
+      }
+  }
+}
+```
+
+```html
+  <li v-for="(person) in people">
+    <div v-for="(value, key, index) in person">
+      {{key}} - {{value}} - Index: {{index}}
+    </div>
+  </li>
+```
+
+
+### key attribute
+
+key attribute allows vuejs to detect elements related wtih specified object/item from list without key vuejs js need decide by self how to handle list changes.
+
+In example below if we fill input, then change order of list the input will stay in the same position instead follow the list items
+
+```html
+<div class="card" v-for="person in people">
+  <h3>{{person.name}}</h3>
+  <p>{{person.message}}</p>
+  <input type="text">
+</div>
+```
+
+before move without key
+
+![before move](https://i.snipboard.io/hDTRfU.jpg)
+
+after move without key
+
+![after move](https://snipboard.io/sXLYZr.jpg)
+
+same example but with the key:
+
+```html
+  <div class="card" v-for="person in people" :key="person.name">
+    <h3>{{person.name}}</h3>
+    <p>{{person.message}}</p>
+    <input type="text">
+  </div>
+```
+
+before move with key
+
+![before move](https://snipboard.io/gEJ0A3.jpg)
+
+after move with key
+
+![after move](https://snipboard.io/TqQz9E.jpg)
+
