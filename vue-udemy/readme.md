@@ -253,11 +253,17 @@ Expects: varies based on value of form inputs element or output of components
 
 Limited to:
 
+```html
 <input>
+```
 
+```html
 <select>
+```
 
+```html
 <textarea>
+```
 
 components
 
