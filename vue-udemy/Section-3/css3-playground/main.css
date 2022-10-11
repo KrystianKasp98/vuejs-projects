@@ -59,6 +59,7 @@ section.settings {
   width: 150px;
   height: 150px;
   background: #8d81f3;
+  transition: transform .375s linear;
 }
 
 button {
@@ -75,4 +76,7 @@ button {
 
 label{
   color: #fff;
+}
+[v-cloak]{
+  display: none;
 }

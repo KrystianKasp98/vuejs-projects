@@ -631,3 +631,6 @@ after move with key
 
 ![after move](https://snipboard.io/TqQz9E.jpg)
 
+### Lifecycle hooks
+
+![Livecycle schema](https://snipboard.io/XPfCiM.jpg)

@@ -4,7 +4,7 @@ let defaultInputsValue = [
     value: {
       min: "0",
       max: "999",
-      current: 0,
+      current: 100,
     },
     unit: "px",
   },
@@ -49,9 +49,9 @@ const vm = Vue.createApp({
     resetInputs() {
       this.inputs = _.cloneDeep(defaultInputsValue)
     },
-    copyToClipBoard() {
+    async copyToClipBoard() {
       const boxStyle = `transform: ${document.querySelector(".box").style.transform};`;
-      navigator.clipboard.writeText(boxStyle);
+      await navigator.clipboard.writeText(boxStyle);
       alert(`Copied to clipboard: ${boxStyle}`);
     }
   },

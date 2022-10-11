@@ -7,8 +7,7 @@
 </head>
 
 <body>
-  <div id="app">
-    {{firstName}}
+  <div id="app" v-cloak>
     <h2>CSS3 Perspective Playground</h2>
     <main>
       <section class="settings">
@@ -17,8 +16,8 @@
             <label>{{`${input.name}: ${input.value.current}${input.unit};`}}</label>
             <input type="range" :min="input.value.min" :max="input.value.max" v-model="input.value.current">
           </div>
-          <button type="button" @click="resetInputs()">Reset</button>
-          <button type="button" @click="copyToClipBoard">Copy</button>
+          <button type="button" @click.prevent="resetInputs()">Reset</button>
+          <button type="button" @click.prevent="copyToClipBoard()">Copy</button>
         </div>
       </section>
       <section class="output">
