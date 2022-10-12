@@ -640,3 +640,51 @@ after move with key
 ### Lifecycle hooks
 
 ![Livecycle schema](https://snipboard.io/XPfCiM.jpg)
+
+lifecycle example in js:
+
+```js
+let vm = Vue.createApp({
+  data() {
+    return {
+      message: "Hello world!"
+    }
+  },
+  // instance creating
+  beforeCreate() {
+    console.log('beforeCreate() function called!', this.message, new Date().getTime());
+  },
+  created() {
+    console.log(
+      "created() function called!",
+      this.message,
+      new Date().getTime()
+    );
+  },
+  // component mounting
+  beforeMount() {
+    console.log(
+      "beforeMount() function called!",
+      this.$el,
+      new Date().getTime()
+    );
+  },
+  mounted() {
+    console.log('mounted() function called!'', this.$el, new Date().getTime());
+  },
+  // data changing
+  beforeUpdate() {
+    console.log('beforeUpdate() function called!');
+  },
+  updated() {
+    console.log('updated() function called!');
+  },
+  // unmounting
+  beforeUnmount() {
+    console.log('beforeUnmount() function called!');
+  }, 
+  unmounted() {
+    console.log('unmounted() function called!');
+  }
+});
+```
