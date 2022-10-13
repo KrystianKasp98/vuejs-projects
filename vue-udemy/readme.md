@@ -688,3 +688,7 @@ let vm = Vue.createApp({
   }
 });
 ```
+
+### vite - script for js framework's templates like react, vue, vanilla
+
+```npm create vite@latest```
