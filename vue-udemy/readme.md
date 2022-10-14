@@ -692,3 +692,22 @@ let vm = Vue.createApp({
 ### vite - script for js framework's templates like react, vue, vanilla
 
 ```npm create vite@latest```
+
+### implementing postcss
+
+```autoprefixer```
+
+```npm i sass```
+
+```npm i autoprefixer --save-dev```
+
+create file ```postcss.config.cjs``` 
+
+add
+
+```js
+module.exports = {
+  plugins: [require('autoprefixer')]
+}
+```
+
