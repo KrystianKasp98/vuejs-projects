@@ -711,3 +711,78 @@ module.exports = {
 }
 ```
 
+### emit events
+
+```app.vue```
+
+```html
+<!-- pass age-change event -->
+<User :age="age" @age-change="updateAge"/> 
+```
+
+```app.vue logic```
+
+```js
+export default {
+  name: "App",
+  data() {
+    return {
+      msg: "Hello World",
+      age: 20
+    };
+  },
+  methods: {
+    sendAlert() {
+      alert('Calling method from app');
+    },
+    // num is second argument in this.$emit() method in component.vue
+    updateAge(num) {
+      this.age += num;
+    }
+  },
+  components: { ButtonComponent, Greeting, User },
+};
+```
+
+```component.vue```
+
+```html
+<!-- on click fires onClickAge() method -->
+<button type="button" @click="onClickAge()">Increase age</button>
+```
+
+```component.vue logic```
+
+```js
+export default {
+  name: 'User',
+  props: {
+    age: Number
+  },
+  emits: ['age-change'],
+  methods: {
+    onClickAge() {
+      this.$emit('age-change', 3); // 3 is num argument in updateAge function in app.vue
+    }
+  }
+}
+```
+
+### advenced props validation 
+
+```js
+{
+  ... 
+  props: {
+    age: {
+      type: Number,
+      required: true,
+      default: 20, // if no property set default as 20
+      validator(value) {
+        return value < 130; // if condition false then console.warning should display with info that validation failed
+      }
+    }
+  }
+  ...
+}
+```
