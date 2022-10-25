@@ -786,3 +786,144 @@ export default {
   ...
 }
 ```
+
+### Slot something similar to {children} in react
+
+app.vue
+
+```html
+<template>
+  <app-form>
+    <div class="help">
+      <p>This is some help text.</p>
+    </div>
+
+    <div class="fields">
+      <input type="text" placeholder="email" />
+      <input type="text" placeholder="username" />
+      <input type="text" placeholder="password" />
+    </div>
+
+    <div class="buttons">
+      <button type="submit">Submit</button>
+    </div>
+  </app-form>
+</template>
+```
+
+```js
+<script>
+import AppForm from "./components/Form.vue";
+
+export default {
+  name: "App",
+  components: {
+    AppForm,
+  },
+};
+</script>
+```
+
+app-form.vue / slot wrapper
+
+```html
+<template>
+  <form>
+    <slot></slot> <!--slot contains childrens inside this component-->
+  </form>
+</template>
+```
+
+### named slots
+
+app.vue
+
+```html
+<template>
+  <div>
+    <app-form>
+      <template v-slot:help>
+        <p>This is some help text.</p>
+      </template>
+
+      <template v-slot:fields>
+        <input type="email" placeholder="email" />
+        <input type="text" placeholder="username" />
+        <input type="password" placeholder="password" />
+      </template>
+
+      <template v-slot:buttons>
+        <button type="submit">Submit</button>
+      </template>
+    </app-form>
+
+    <app-form>
+      <template v-slot:help>
+        <p>Contact help text.</p>
+      </template>
+
+      <template v-slot:fields>
+        <input type="text" placeholder="name" />
+        <input type="text" placeholder="message" />
+      </template>
+
+      <template v-slot:buttons>
+        <button type="submit">Submit</button>
+      </template>
+    </app-form>
+  </div>
+</template>
+```
+
+form.vue
+
+```html
+<template>
+  <form>
+    <div class="help">
+      <slot name="help"></slot>
+    </div>
+    <div class="fields">
+      <slot name="fields"></slot>
+    </div>
+    <div class="buttons">
+      <slot name="buttons"></slot>
+    </div>
+  </form>
+</template>
+```
+
+### dynamic components
+
+app.vue
+
+```html
+<template>
+  <div>
+    <select v-model="componentName">
+      <option value="Home">Home</option>
+      <option value="About">About</option>
+    </select>
+
+    <component :is="componentName" />
+  </div>
+</template>
+
+<script>
+import Home from "./components/Home.vue";
+import About from "./components/About.vue";
+
+export default {
+  name: "App",
+  components: {
+    Home,
+    About,
+  },
+  data() {
+    return {
+      componentName: "Home",
+    };
+  },
+};
+</script>
+```
